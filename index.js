@@ -21,6 +21,15 @@ app.get('/user/:userId', (req, res) => {
     }
 });
 
+app.get('/post/:postId', (req, res) => {
+    let post = getPostById(req.params.postId);
+    if (post) {
+        res.render('post', { post });
+    } else {
+        res.send('Post not found');
+    }
+});
+
 app.listen(3000);
 
 let getUsers = () => {
@@ -69,7 +78,6 @@ let posts = getPosts();
 let getPostsByUserId = (id) => {
     let res = [];
     for (let i = 0; i < posts.length; ++i) {
-        console.log(posts[i].user.userId, id);
         if (posts[i].user.userId == id) res.push(posts[i]);
     }
     return res;

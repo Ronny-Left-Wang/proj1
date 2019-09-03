@@ -1,6 +1,5 @@
 class Post {
     constructor({ title = "Untitled", content, dateCreated, user, postId }) {
-        // TODO options
         this.postId = postId;
         this.user = user;
         this.title = title;
