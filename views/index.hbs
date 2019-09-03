@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
+    <h1>Users</h1>
     <ul>
         {{#each users}}
-        <li>Name: {{this.name}}, Date Created: {{this.dateCreated}}</li>
+        <li>ID: {{this.userId}}, Name: {{this.name}}, Date Created: {{this.dateCreated}}</li>
+        {{/each}}
+    </ul>
+    <h1>Posts</h1>
+    <ul>
+        {{#each posts}}
+        <li>ID: {{this.postId}}, Title: {{this.title}}, Created by: {{this.user.name}}, Date Created: {{this.dateCreated}}, Content: {{this.content}}</li>
         {{/each}}
     </ul>
 </body>
