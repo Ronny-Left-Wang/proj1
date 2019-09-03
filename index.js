@@ -8,7 +8,7 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
 
 app.get('/', (req, res) => {
-    res.render('index', { users, posts });
+    res.render('index', { users, posts, layout: 'layouts/default' });
 });
 
 app.get('/user/:userId', (req, res) => {
