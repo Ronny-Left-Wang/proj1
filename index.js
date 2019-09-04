@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.get('/user/:userId', (req, res) => {
     let user = getUserById(req.params.userId);
     if (user) {
-        res.render('user', { user, posts: getPostsByUserId(user.userId) });
+        res.render('user', { user, posts: getPostsByUserId(user.userId), layout: 'layouts/default' });
     } else {
         res.send('User not found');
     }
@@ -27,7 +27,7 @@ app.get('/user/:userId', (req, res) => {
 app.get('/post/:postId', (req, res) => {
     let post = getPostById(req.params.postId);
     if (post) {
-        res.render('post', { post });
+        res.render('post', { post, layout: 'layouts/default' });
     } else {
         res.send('Post not found');
     }
