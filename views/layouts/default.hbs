@@ -6,10 +6,17 @@
 </head>
 
 <body class="{{template}}">
-    {{> header}}
+    <div class="jumbotron text-center">
+        <h1>Juxtaposition...</h1>
+    </div>
+    <div class="font-italic text-center">
+        {{> header}}
+    </div>
     <div class="container">
         {{{body}}}
     </div>
-    {{> footer}}
+    <div class="font-italic text-center">
+        {{> footer}}
+    </div>
 </body>
 </html>
