@@ -4,6 +4,11 @@ const path = require('path');
 const User = require('./models/User');
 const Post = require('./models/Post');
 
+const { client } = require('./db');
+client.connect(err => {
+    if (!err) console.log('Connected');
+});
+
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
 
