@@ -12,7 +12,7 @@ app.set('view engine','hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.get('/', (req, res) => {
-    res.render('index', { users, posts, layout: 'layouts/default' });
+    res.render('index', { users, posts, layout: 'layouts/default', template: 'home-template' });
 });
 
 app.get('/user/:userId', (req, res) => {
