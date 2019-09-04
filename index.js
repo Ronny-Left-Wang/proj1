@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/user/:userId', (req, res) => {
     let user = getUserById(req.params.userId);
     if (user) {
-        res.render('user', { user, posts: getPostsByUserId(user.userId), layout: 'layouts/default' });
+        res.render('user', { user, posts: getPostsByUserId(user.userId), layout: 'layouts/userProfile' });
     } else {
         res.send('User not found');
     }
