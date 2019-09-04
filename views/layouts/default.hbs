@@ -3,20 +3,33 @@
 <head>
     <title>Juxtaposition</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="{{template}}">
     <div class="jumbotron text-center">
         <h1>Juxtaposition...</h1>
     </div>
-    <div class="font-italic text-center">
-        {{> header}}
-    </div>
     <div class="container">
-        {{{body}}}
-    </div>
-    <div class="font-italic text-center">
-        {{> footer}}
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                <div class="font-italic text-center">
+                    {{> header}}
+                </div>
+                {{{body}}}
+                <div class="font-italic text-center">
+                    {{> footer}}
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
