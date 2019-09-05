@@ -1,11 +1,13 @@
 const app = require('express')();
 const path = require('path');
 const hbs = require('hbs');
+const express = require('express');
 
 const User = require('./models/User');
 const Post = require('./models/Post');
 
 hbs.registerPartials(__dirname + '/views/partials');
+app.use(express.static(__dirname + '/public'));
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');

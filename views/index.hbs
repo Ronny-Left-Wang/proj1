@@ -12,13 +12,20 @@
         {{/each}}
     </ul>
     -->
-    <h1>Posts</h1>
     <ul>
         {{#each posts}}
-            <h5>{{this.title}}</h5>
-            Created by: {{this.user.name}}, Date Created: {{this.dateCreated}}<br>
-            Content: {{this.content}}
-        <hr>
+            <div class="title">
+                <a href="">{{this.title}}</a>
+            </div>
+            <div class="author-details">
+                {{this.user.name}} ~ {{this.dateCreated}}
+            </div>
+            <div class="content">
+                {{this.content}}
+            </div>
+            <div class="space-between-posts">
+                <hr>
+            </div>
         {{/each}}
     </ul>
 </body>
