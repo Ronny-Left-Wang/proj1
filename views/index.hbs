@@ -15,11 +15,9 @@
     <h1>Posts</h1>
     <ul>
         {{#each posts}}
-        <li>
             <h5>{{this.title}}</h5>
             Created by: {{this.user.name}}, Date Created: {{this.dateCreated}}<br>
             Content: {{this.content}}
-        </li>
         <hr>
         {{/each}}
     </ul>
