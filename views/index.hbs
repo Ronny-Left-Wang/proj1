@@ -15,7 +15,7 @@
     <ul>
         {{#each posts}}
             <div class="title">
-                <a href="">{{this.title}}</a>
+                <a href="/post/{{this.postId}}">{{this.title}}</a>
             </div>
             <div class="author-details">
                 {{this.user.name}} ~ {{this.dateCreated}}

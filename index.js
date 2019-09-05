@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
     res.render('index', { users, posts, layout: 'layouts/default' });
 });
 
+app.get('/register', (req, res) => {
+    res.render('register', { layout: 'layouts/default' });
+});
+
 app.get('/user/:userId', (req, res) => {
     let user = getUserById(req.params.userId);
     if (user) {
