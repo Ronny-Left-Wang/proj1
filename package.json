@@ -9,7 +9,7 @@
   "scripts": {
     "devstart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "makedb": "node makeDb.js"
+    "makedb": "node db/makeDb.js"
   },
   "repository": {
     "type": "git",
