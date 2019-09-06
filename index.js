@@ -20,6 +20,10 @@ app.get('/register', (req, res) => {
     res.render('register', { layout: 'layouts/register' });
 });
 
+app.get('/createPost', (req, res) => {
+    res.render('createPost', { layout: 'layouts/default' });
+});
+
 
 app.get('/login', (req, res) => {
     res.render('login', { layout: 'layouts/register' });
