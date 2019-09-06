@@ -20,6 +20,11 @@ app.get('/register', (req, res) => {
     res.render('register', { layout: 'layouts/register' });
 });
 
+
+app.get('/login', (req, res) => {
+    res.render('login', { layout: 'layouts/register' });
+});
+
 app.get('/user/:userId', (req, res) => {
     let user = getUserById(req.params.userId);
     if (user) {
