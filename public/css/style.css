@@ -14,6 +14,10 @@ hr {
     color: inherit;
 }
 
+.author-details a {
+    color: inherit;
+}
+
 .title {
     font-size: 30px;
     font-weight: 650;

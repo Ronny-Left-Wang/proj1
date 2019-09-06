@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-    res.render('register', { layout: 'layouts/default' });
+    res.render('register', { layout: 'layouts/register' });
 });
 
 app.get('/user/:userId', (req, res) => {
