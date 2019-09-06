@@ -7,7 +7,7 @@ const User = require('./models/User');
 const Post = require('./models/Post');
 
 hbs.registerPartials(__dirname + '/views/partials');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/'));
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
@@ -28,7 +28,7 @@ app.get('/login', (req, res) => {
 app.get('/user/:userId', (req, res) => {
     let user = getUserById(req.params.userId);
     if (user) {
-        res.render('user', { user, posts: getPostsByUserId(user.userId), layout: 'layouts/userProfile' });
+        res.render('user', { user, posts: getPostsByUserId(user.userId),  layout: 'layouts/default' });
     } else {
         res.send('User not found');
     }

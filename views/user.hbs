@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+<style>
+body {
+    background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+</style>
+</head>
+<body class="{{template}}">
     <h1>{{user.name}}</h1>
     <h4>Member since {{user.dateCreated}}</h4>
     <h5>Posts by {{user.name}}</h5>
