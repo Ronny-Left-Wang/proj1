@@ -7,6 +7,7 @@ const Post = require('./models/Post');
 const { client } = require('./db');
 client.connect(err => {
     if (!err) console.log('Connected');
+    else console.err('Could not connect to db.');
 });
 
 app.set('views',path.join(__dirname,'views'));
