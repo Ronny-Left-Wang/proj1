@@ -15,7 +15,7 @@ body {
 <body class="{{template}}">
     <h1>{{user.name}}</h1>
     <h4>Member since {{user.dateCreated}}</h4>
-    <h5>Posts by {{user.name}}</h5>
+    <h5>Posts</h5>
     <ul>
         {{#each posts}}
             <li><a href="/post/{{this.postId}}">{{this.title}}</a></li>
