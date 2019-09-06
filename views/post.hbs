@@ -9,12 +9,17 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
+
+.post {
+    margin-bottom: 50px;
+}
+
 </style>
 </head>
 <body>
     <h1>{{post.title}}</h1>
-    <h4>{{post.dateCreated}} ~ <a href="/user/{{post.user.userId}}">{{post.user.name}}</a></h4>
-    <p>
+    <h4>{{post.dateCreated}} ~ <a href="/user/{{post.user.userId}}" style="color: grey;">{{post.user.name}}</a></h4>
+    <p class="post">
         {{post.content}}
     </p>
 </body>
