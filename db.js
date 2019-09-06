@@ -12,14 +12,9 @@ let config = {
 const pool = new Pool(config);
 
 async function getClient() {
-    try {
-        let client = await pool.connect();
-        console.log('Connected to db succesfully!');
-        return client;
-    } catch(err) {
-        console.error('Failed to connect to db: ' + err);
-        return null;
-    }
+    let client = await pool.connect();
+    console.log('Connected to db succesfully!');
+    return client;
 }
 
 module.exports = {
