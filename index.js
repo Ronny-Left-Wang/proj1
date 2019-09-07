@@ -6,19 +6,85 @@ const express = require('express');
 const User = require('./models/User');
 const Post = require('./models/Post');
 
+const { getClient } = require('./db/db');
+
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public/'));
-
-const { client } = require('./db');
-client.connect(err => {
-    if (!err) console.log('Connected');
-});
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
 
-app.get('/', (req, res) => {
-    res.render('index', { users, posts, layout: 'layouts/default' });
+app.get('/', async (req, res) => {
+    try {
+        let client = await getClient();
+        let qres = await client.query('SELECT * from users');
+        let users = [];
+        qres.rows.forEach((row) => {
+            let name = row.first_name + ' ' + row.last_name;
+            let user = new User({name, dateCreated: row.date_created, userId: row.user_id, email: row.email});
+            users.push(user);
+        });
+        qres = await client.query('SELECT * from posts');
+        let posts = [];
+        qres.rows.forEach((row) => {
+            let user_id = row.user_id;
+            let user = null;
+            for (let i = 0; i < users.length; ++i) {
+                let u = users[i];
+                if (u.userId == user_id) user = u;
+            };
+            if (!user) {
+                console.error(`Post ${row.post_id} with user id ${row.user_id} cannot find user.`);
+            } else {
+                let post = new Post({ user, postId: row.post_id, title: row.title, content: row.content, dateCreated: row.date_created });
+                posts.push(post);
+            }
+        });
+        res.render('index', { users, posts, layout: 'layouts/default' });
+    } catch(err) {
+        res.send('Error: ' + err);
+    }
+});
+
+app.get('/user/:userId', async (req, res) => {
+    try {
+        let client = await getClient();
+        let qres = await client.query(`SELECT * from users WHERE user_id = ${req.params.userId}`);
+        let row = qres.rows[0];
+        let name = row.first_name + ' ' + row.last_name;
+        let user = new User({name, dateCreated: row.date_created, userId: row.user_id, email: row.email});
+        if (user) {
+            let posts = [];
+            qres = await client.query(`SELECT * FROM posts WHERE user_id = ${row.user_id}`);
+            qres.rows.forEach((row) => {
+                let post = new Post({ user, postId: row.post_id, title: row.title, content: row.content, dateCreated: row.date_created });
+                posts.push(post);
+            });
+            res.render('user', { user, posts, layout: 'layouts/default' });
+        } else {
+            res.send('User not found');
+        }
+    } catch(err) {
+        res.send('Error: ' + err);
+    }
+});
+
+app.get('/post/:postId', async (req, res) => {
+    try {
+        let client = await getClient();
+        let qres = await client.query(`SELECT * from posts WHERE post_id = ${req.params.postId}`);
+        let row = qres.rows[0];
+        if (row) {
+            qres = await client.query(`SELECT * from users WHERE user_id = ${row.user_id}`);
+            let user = qres.rows[0];
+            let post = new Post({ user, postId: row.post_id, title: row.title, dateCreated: row.date_created, content: row.content });
+            res.render('post', { post, layout: 'layouts/default' });
+        } else {
+            res.send('Post not found');
+        }
+    } catch(err) {
+        res.send('Error: ' + err);
+    }
 });
 
 app.get('/register', (req, res) => {
@@ -29,31 +95,13 @@ app.get('/createPost', (req, res) => {
     res.render('createPost', { layout: 'layouts/default' });
 });
 
-
 app.get('/login', (req, res) => {
     res.render('login', { layout: 'layouts/register' });
 });
 
-app.get('/user/:userId', (req, res) => {
-    let user = getUserById(req.params.userId);
-    if (user) {
-        res.render('user', { user, posts: getPostsByUserId(user.userId),  layout: 'layouts/default' });
-    } else {
-        res.send('User not found');
-    }
-});
-
-app.get('/post/:postId', (req, res) => {
-    let post = getPostById(req.params.postId);
-    if (post) {
-        res.render('post', { post, layout: 'layouts/default' });
-    } else {
-        res.send('Post not found');
-    }
-});
-
 app.listen(3000);
 
+/*
 let getUsers = () => {
     let createUser = name =>
         new User({name : name, dateCreated: Date.now().toString(), userId: Math.ceil(Math.random() * 1000000)});
@@ -111,3 +159,4 @@ let getPostById = (id) => {
     }
     return null;
 }
+*/
