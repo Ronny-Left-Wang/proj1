@@ -52,7 +52,8 @@
 #### As a user, I want to manage posts
 | Est. Time | Task |
 | --------- | ---- |
-|           |      |
+|           | Post manipulation in backend & db |
+|           |  |
 
 #### As an unregistered user, I want to create an account
 | Est. Time | Task |
