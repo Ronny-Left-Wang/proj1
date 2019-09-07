@@ -1,0 +1,40 @@
+body {
+    background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+hr {
+    margin: 0;
+}
+
+.title a {
+    color: inherit;
+}
+
+.author-details a {
+    color: inherit;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 650;
+    margin-bottom: -3.5px;
+}
+
+.author-details {
+    color: grey;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.content {
+
+}
+
+.space-between-posts {
+    margin: 40px 0; 
+}

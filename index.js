@@ -1,20 +1,18 @@
 const app = require('express')();
 const path = require('path');
+const hbs = require('hbs');
+const express = require('express');
 
 const User = require('./models/User');
 const Post = require('./models/Post');
 
 const { getClient } = require('./db/db');
-/*
-client.connect(err => {
-    if (!err) console.log('Connected');
-    else console.err('Could not connect to db.');
-});
-*/
+
+hbs.registerPartials(__dirname + '/views/partials');
+app.use(express.static(__dirname + '/public/'));
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
-
 
 app.get('/', async (req, res) => {
     try {
@@ -42,7 +40,7 @@ app.get('/', async (req, res) => {
                 posts.push(post);
             }
         });
-        res.render('index', { users, posts });
+        res.render('index', { users, posts, layout: 'layouts/default' });
     } catch(err) {
         res.send('Error: ' + err);
     }
@@ -62,7 +60,7 @@ app.get('/user/:userId', async (req, res) => {
                 let post = new Post({ user, postId: row.post_id, title: row.title, content: row.content, dateCreated: row.date_created });
                 posts.push(post);
             });
-            res.render('user', { user, posts });
+            res.render('user', { user, posts, layout: 'layouts/default' });
         } else {
             res.send('User not found');
         }
@@ -80,13 +78,25 @@ app.get('/post/:postId', async (req, res) => {
             qres = await client.query(`SELECT * from users WHERE user_id = ${row.user_id}`);
             let user = qres.rows[0];
             let post = new Post({ user, postId: row.post_id, title: row.title, dateCreated: row.date_created, content: row.content });
-            res.render('post', { post });
+            res.render('post', { post, layout: 'layouts/default' });
         } else {
             res.send('Post not found');
         }
     } catch(err) {
         res.send('Error: ' + err);
     }
+});
+
+app.get('/register', (req, res) => {
+    res.render('register', { layout: 'layouts/register' });
+});
+
+app.get('/createPost', (req, res) => {
+    res.render('createPost', { layout: 'layouts/default' });
+});
+
+app.get('/login', (req, res) => {
+    res.render('login', { layout: 'layouts/register' });
 });
 
 app.listen(3000);
