@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body class="{{template}}">
+    <!--
     <h1>Users</h1>
     <ul>
         {{#each users}}
         <li>ID: {{this.userId}}, Name: {{this.name}}, Date Created: {{this.dateCreated}}</li>
         {{/each}}
     </ul>
-    <h1>Posts</h1>
+    -->
     <ul>
         {{#each posts}}
-        <li>ID: {{this.postId}}, Title: {{this.title}}, Created by: {{this.user.name}}, Date Created: {{this.dateCreated}}, Content: {{this.content}}</li>
+            <div class="title">
+                <a href="/post/{{this.postId}}">{{this.title}}</a>
+            </div>
+            <div class="author-details">
+                <a href="/user/{{this.user.userId}}">{{this.user.name}}</a> ~ {{this.dateCreated}}
+            </div>
+            <div class="content">
+                {{this.content}}
+            </div>
+            <div class="space-between-posts">
+                <hr>
+            </div>
         {{/each}}
     </ul>
 </body>

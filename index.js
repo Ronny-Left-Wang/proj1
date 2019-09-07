@@ -1,8 +1,13 @@
 const app = require('express')();
 const path = require('path');
+const hbs = require('hbs');
+const express = require('express');
 
 const User = require('./models/User');
 const Post = require('./models/Post');
+
+hbs.registerPartials(__dirname + '/views/partials');
+app.use(express.static(__dirname + '/public/'));
 
 const { client } = require('./db');
 client.connect(err => {
@@ -13,13 +18,26 @@ app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
 
 app.get('/', (req, res) => {
-    res.render('index', { users, posts });
+    res.render('index', { users, posts, layout: 'layouts/default' });
+});
+
+app.get('/register', (req, res) => {
+    res.render('register', { layout: 'layouts/register' });
+});
+
+app.get('/createPost', (req, res) => {
+    res.render('createPost', { layout: 'layouts/default' });
+});
+
+
+app.get('/login', (req, res) => {
+    res.render('login', { layout: 'layouts/register' });
 });
 
 app.get('/user/:userId', (req, res) => {
     let user = getUserById(req.params.userId);
     if (user) {
-        res.render('user', { user, posts: getPostsByUserId(user.userId) });
+        res.render('user', { user, posts: getPostsByUserId(user.userId),  layout: 'layouts/default' });
     } else {
         res.send('User not found');
     }
@@ -28,7 +46,7 @@ app.get('/user/:userId', (req, res) => {
 app.get('/post/:postId', (req, res) => {
     let post = getPostById(req.params.postId);
     if (post) {
-        res.render('post', { post });
+        res.render('post', { post, layout: 'layouts/default' });
     } else {
         res.send('Post not found');
     }
