@@ -9,6 +9,11 @@ const Post = require('./models/Post');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public/'));
 
+const { client } = require('./db');
+client.connect(err => {
+    if (!err) console.log('Connected');
+});
+
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','hbs');
 
