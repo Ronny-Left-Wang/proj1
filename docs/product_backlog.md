@@ -52,25 +52,32 @@
 #### As a user, I want to manage posts
 | Est. Time | Task |
 | --------- | ---- |
-|           | Post manipulation in backend & db |
-|           |  |
+| 2h        | Make a page for editing and deleting post |
+|           | Backend for editing posts |
+|           | Backend for deleting posts |
 
 #### As an unregistered user, I want to create an account
 | Est. Time | Task |
 | --------- | ---- |
 | 3h        | User model in backend & db |
-| 2h        | Display user profile listing their comments on posts
-| 4h        | Registration view |
+| 2h        | Display user profile listing their comments on posts |
+| 2h        | Registration view |
+| 1h        | Login view |
+| 2h        | Display log in/out message |
+|           | Backend for creating an account |
 
 #### As a user, I want to manage my account
 | Est. Time | Task |
 | --------- | ---- |
-|           |      |
+| 3h        | Make a page for user preferences |
+|           | Backend for editing account |
+|           | Backend for deleting account |
 
 #### As a user, I want to stay securely logged in
 | Est. Time | Task |
 | --------- | ---- |
-|           |      |
+|           | Check if user is logged in |
+|           | Backend for keeping user securely logged in |
 
 #### As an admin, I want to manage users
 | Est. Time | Task |
@@ -80,7 +87,6 @@
 #### As an admin, I want to manage posts
 | Est. Time | Task |
 | --------- | ---- |
-|           |      |
 
 #### As an admin, I want to manage comments
 | Est. Time | Task |
@@ -97,4 +103,5 @@
 | Est. Time | Task |
 | --------- | ---- |
 |           |      |
+|           | Backend for deleting posts |
 
