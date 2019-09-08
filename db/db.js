@@ -10,10 +10,13 @@ let config = {
 }
 
 const pool = new Pool(config);
+let client = null;
 
 async function getClient() {
-    let client = await pool.connect();
-    console.log('Connected to db succesfully!');
+    if (!client) {
+        client = await pool.connect();
+        console.log('Connected to db succesfully!');
+    }
     return client;
 }
 
