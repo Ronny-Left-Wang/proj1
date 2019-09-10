@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+body {
+    background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+</style>
+</head>
+<body class="{{template}}">
+    <h2>User Preferences</h2>
+    <form>
+        <div class="form-group">
+            <label for="email">Email (need to make static)</label>
+            <input type="email" class="form-control" id="email">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city">
+        </div>
+    </form>
+    <div> 
+        <button type="button" class="btn btn-primary">Change password</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" style="margin-top: 10px">Save changes</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-danger" style="margin-top: 10px">Delete account</button>
+    </div>
+</body>
+</html>

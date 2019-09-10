@@ -101,6 +101,10 @@ app.get('/login', (req, res) => {
     res.render('login', { layout: 'layouts/register' });
 });
 
+app.get('/userPreferences', (req, res) => {
+    res.render('userPreferences', { layout: 'layouts/default' });
+});
+
 app.listen(3000);
 
 /*
