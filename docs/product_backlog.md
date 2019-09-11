@@ -52,32 +52,31 @@
 #### As a user, I want to manage posts
 | Est. Time | Task |
 | --------- | ---- |
-| 3h        | Make a page for editing and deleting post |
-| 1h         | Backend for editing posts |
-| 1h         | Backend for deleting posts |
+| 3h        | View for editing and deleting post |
+| 1h        | Backend for editing posts |
+| 1h        | Backend for deleting posts |
 
 #### As an unregistered user, I want to create an account
 | Est. Time | Task |
 | --------- | ---- |
 | 3h        | User model in backend & db |
-| 2h        | Display user profile listing their comments on posts |
 | 2h        | Registration view |
 | 1h        | Login view |
-| 2h        | Display log in/out message |
+| 5h        | Backend: login user authentication |
 | 2h        | Backend for creating an account |
 
 #### As a user, I want to manage my account
 | Est. Time | Task |
 | --------- | ---- |
 | 3h        | Create a view for user preferences |
-| 1h         | Backend for editing account |
-| 1h         | Backend for deleting account |
+| 1h        | Backend for editing account |
+| 1h        | Backend for deleting account |
 
 #### As a user, I want to stay securely logged in
 | Est. Time | Task |
 | --------- | ---- |
 | 2h        | For every view, check if user is logged in |
-| 4h         | Backend for authorization token |
+| 4h        | Backend for authorization token |
 
 #### As an admin, I want to manage users
 | Est. Time | Task |
@@ -88,7 +87,7 @@
 #### As an admin, I want to manage posts
 | Est. Time | Task |
 | --------- | ---- |
-| 1h         | For the post editing views, give access if user of type admin is logged in |
+| 1h        | For the post editing views, give access if user of type admin is logged in |
 
 #### As an admin, I want to delete comments
 | Est. Time | Task |
@@ -98,6 +97,7 @@
 #### As a user, I want to comment on posts
 | Est. Time | Task |
 | --------- | ---- |
+| 2h        | Display user profile listing their comments on posts |
 | 3h        | Comment model in backend & db |
 | 2h        | Make a comment section at bottom of Post view |
 
