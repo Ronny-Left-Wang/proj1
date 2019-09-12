@@ -8,8 +8,19 @@
     <form class="text-center p-0" action="#!">
         <p class="h4 mb-4">Create Post</p>
         <input type="text" class="form-control mb-4" placeHolder="Title" />
-        <textArea class="form-control" style="resize: none; min-width: 100%; height: 300px;"></textArea>
+        <textArea id="content" class="form-control" style="resize: none; min-width: 100%; height: 300px;"></textArea>
         <button class="btn btn-info my-4 btn-block" type="submit">Submit</button>
     </form>
+    <script>
+        const { getClient } = require('./db/db');
+        let date = Date.now() / 1000;
+        let query2 = `
+                INSERT INTO posts (user_id, title, date_created, content)
+                VALUES
+                    (2, Test, TO_TIMESTAMP(${date}), 'HELLO')
+            `;
+        let post = query(query);
+        console.log("hello");
+    </script>
 </body>
 </html>

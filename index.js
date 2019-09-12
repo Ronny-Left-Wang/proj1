@@ -42,7 +42,7 @@ app.get('/', async (req, res) => {
         });
         res.render('index', { users, posts, layout: 'layouts/default' });
     } catch(err) {
-        res.send('Error: ' + err);
+        res.send(err);
     }
 });
 
@@ -94,6 +94,21 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/createPost', (req, res) => {
+    /*
+    try {
+        let client = await getClient();
+        let date = Date.now() / 1000;
+        let query2 = `
+                INSERT INTO posts (user_id, title, date_created, content)
+                VALUES
+                    (2, Test, TO_TIMESTAMP(${date}), 'HELLO')
+            `;
+        let post = await client.query(query);
+        res.render('createPost', { layout: 'layouts/default' });
+    } catch(err) {
+        res.send(err);
+    }
+    */
     res.render('createPost', { layout: 'layouts/default' });
 });
 
@@ -105,7 +120,9 @@ app.get('/userPreferences', (req, res) => {
     res.render('userPreferences', { layout: 'layouts/default' });
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+    console.log('Listening on port 3000');
+});
 
 /*
 let getUsers = () => {
