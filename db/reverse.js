@@ -5,7 +5,7 @@ const { getClient } = require('./db');
 async function addPost(client) {
     let query = `
         UPDATE posts
-        SET content = 'NEW CONTENT'
+        SET content = 'NEW CONTENThelloo'
         WHERE
             user_id = 1;
     `

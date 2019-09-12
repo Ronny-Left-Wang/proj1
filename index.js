@@ -94,21 +94,6 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/createPost', (req, res) => {
-    /*
-    try {
-        let client = await getClient();
-        let date = Date.now() / 1000;
-        let query2 = `
-                INSERT INTO posts (user_id, title, date_created, content)
-                VALUES
-                    (2, Test, TO_TIMESTAMP(${date}), 'HELLO')
-            `;
-        let post = await client.query(query);
-        res.render('createPost', { layout: 'layouts/default' });
-    } catch(err) {
-        res.send(err);
-    }
-    */
     res.render('createPost', { layout: 'layouts/default' });
 });
 
