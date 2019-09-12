@@ -19,7 +19,7 @@
                 VALUES
                     (2, Test, TO_TIMESTAMP(${date}), 'HELLO')
             `;
-        let post = query(query);
+        let post = client.query(query);
         console.log("hello");
     </script>
 </body>
