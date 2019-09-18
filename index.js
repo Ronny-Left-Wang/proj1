@@ -24,18 +24,6 @@ app.use('/', indexRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
 
-app.get('/register', (req, res) => {
-    res.render('register', { layout: 'layouts/register' });
-});
-
-app.get('/login', (req, res) => {
-    res.render('login', { layout: 'layouts/register' });
-});
-
-app.get('/userPreferences', (req, res) => {
-    res.render('userPreferences', { layout: 'layouts/default' });
-});
-
 app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
