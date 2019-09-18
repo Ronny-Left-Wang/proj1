@@ -2,6 +2,8 @@
  * I know this is a terrible implementation and I apologize for anyone having to look at this
  */
 const { getClient } = require('./db');
+const bcrypt = require('bcrypt');
+const saltRounds = 4;
 
 async function dropTables(client) {
     let query = 'DROP TABLE IF EXISTS posts, users';
@@ -39,16 +41,17 @@ async function createTables(client) {
 
 async function fillTables(client) {
     let date = Date.now() / 1000;
+    let hashed_password = bcrypt.hashSync('password', saltRounds);
     let query = `
             INSERT INTO users (first_name, last_name, email, hashed_password, date_created)
             VALUES
-                ('Ronny', 'Ritter', 'ronnyrit@gmail.com', 'loser', TO_TIMESTAMP(${date})),
-                ('Brian', 'Johnson', 'kl2kl34kjl@gmail.com', 'loser', TO_TIMESTAMP(${date})),
-                ('Lori', 'Muyamiheehee', 'jkfsklfjksdlj1@gmail.com', 'loser', TO_TIMESTAMP(${date})),
-                ('Axl', 'Rose', '12939971823jk1kj23jk@gmail.com', 'loser', TO_TIMESTAMP(${date})),
-                ('Sam', 'Winchester', 'klsdjkdlflkjm@gmail.com', 'loser', TO_TIMESTAMP(${date})),
-                ('Saishruthi', 'Bongo', 'pingas@gmail.com', 'loser', TO_TIMESTAMP(${date})),
-                ('Donkey', 'Dong', 'jlkaslkjdjs@gmail.com', 'loser', TO_TIMESTAMP(${date}))
+                ('Ronny', 'Ritter', 'ronnyrit@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date})),
+                ('Brian', 'Johnson', 'kl2kl34kjl@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date})),
+                ('Lori', 'Muyamiheehee', 'jkfsklfjksdlj1@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date})),
+                ('Axl', 'Rose', '12939971823jk1kj23jk@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date})),
+                ('Sam', 'Winchester', 'klsdjkdlflkjm@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date})),
+                ('Saishruthi', 'Bongo', 'pingas@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date})),
+                ('Donkey', 'Dong', 'jlkaslkjdjs@gmail.com', '${hashed_password}', TO_TIMESTAMP(${date}))
     `;
     let res = await(client.query(query));
     query = `
