@@ -1,8 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const { getClient } = require('../db/db');
+
 const User = require('../models/User');
 const Post = require('../models/Post');
+
+router.get('/create', (req, res) => {
+    res.render('createPost', { layout: 'layouts/default' });
+});
+
+router.post('/create', async (req, res) => {
+    try {
+        let client = await getClient();
+        //let res = await client.query(``);
+        let { title, content } = req.body;
+        const user = new User({
+            name: 'Guy', dateCreated: Date.now(), userId: '1', email: 'guy@gmail.com'
+        });
+        let date = Date.now() / 1000;
+        let query = `
+            INSERT INTO posts (user_id, title, date_created, content)
+            VALUES
+                (${user.userId}, '${title}', TO_TIMESTAMP(${date}), '${content}')
+        `;
+        let qres = await client.query(query);
+        res.send('Post successfully created');
+    } catch(err) {
+        res.send('Error: ' + err);
+    }
+});
 
 router.get('/:postId', async (req, res) => {
     try {
@@ -23,5 +49,7 @@ router.get('/:postId', async (req, res) => {
         res.send('Error: ' + err);
     }
 });
+
+
 
 module.exports = router;

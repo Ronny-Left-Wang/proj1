@@ -15,8 +15,10 @@ const { getClient } = require('./db/db');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public/'));
 
-app.set('views',path.join(__dirname,'views'));
-app.set('view engine','hbs');
+app.use(express.urlencoded({ extended: true }));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.use('/', indexRoute);
 app.use('/post', postRoute);
@@ -24,10 +26,6 @@ app.use('/user', userRoute);
 
 app.get('/register', (req, res) => {
     res.render('register', { layout: 'layouts/register' });
-});
-
-app.get('/createPost', (req, res) => {
-    res.render('createPost', { layout: 'layouts/default' });
 });
 
 app.get('/login', (req, res) => {
