@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Ronny-Left-Wang/proj1#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "express": "^4.17.1",
     "hbs": "^4.0.4",
     "nodemon": "^1.19.1",

@@ -6,15 +6,15 @@
 </head>
 <body>
     <!-- Default form register -->
-    <form class="text-center border border-light p-5" action="#!">
+    <form class="text-center border border-light p-5" method="post">
 
         <p class="h4 mb-4">Log In</p>
 
         <!-- E-mail -->
-        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+        <input name="email" type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
 
         <!-- Password -->
-        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+        <input name="password" type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
 
         <!-- Log in button -->
         <button class="btn btn-info my-4 btn-block" type="submit">Log In</button>

@@ -3,6 +3,8 @@ const router = express.Router();
 const { getClient } = require('../db/db');
 const User = require('../models/User');
 const Post = require('../models/Post');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 router.get('/', async (req, res) => {
     try {
@@ -45,10 +47,11 @@ router.post('/register', async (req, res) => {
         let { first_name, last_name, email, password } = req.body;
         let name = first_name + ' ' + last_name;
         let date = Date.now() / 1000;
+        let hashed_password = bcrypt.hashSync(password, saltRounds);
         let query = `
             INSERT INTO users (first_name, last_name, email, hashed_password, date_created)
             VALUES
-                ('${first_name}', '${last_name}', '${email}', '${password}', TO_TIMESTAMP(${date}))
+                ('${first_name}', '${last_name}', '${email}', '${hashed_password}', TO_TIMESTAMP(${date}))
         `;
         let qres = await client.query(query);
         res.send('Success creating user ' + name);
@@ -59,6 +62,27 @@ router.post('/register', async (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('login', { layout: 'layouts/register' });
+});
+
+router.post('/login', async (req, res) => {
+    try {
+        let client = await getClient();
+        let { email, password } = req.body;
+        let query = `
+            SELECT * FROM users
+            WHERE email='${email}'
+        `;
+        let qres = await client.query(query);
+        let row = qres.rows[0];
+        let match = bcrypt.compareSync(password, row.hashed_password);
+        if (match) {
+            res.send('Login successful.');
+        } else {
+            res.redirect(req.baseUrl + '/login');
+        }
+    } catch(err) {
+        res.send('Error: ' + err);
+    }
 });
 
 router.get('/userPreferences', (req, res) => {
