@@ -33,6 +33,17 @@ router.post('/create', async (req, res) => {
     }
 });
 
+router.delete('/:postId', async (req, res) => {
+    let postId = req.params.postId;
+    try {
+        let client = await getClient();
+        let qres = await client.query(`DELETE FROM posts WHERE post_id = ${req.params.postId}`);
+        res.send('Post ' + postId + ' successfully deleted.');
+    } catch (err) {
+        res.send('Error: ' + err);
+    }
+});
+
 router.get('/:postId', async (req, res) => {
     try {
         let client = await getClient();
