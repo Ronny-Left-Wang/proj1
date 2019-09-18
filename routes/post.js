@@ -22,9 +22,12 @@ router.post('/create', async (req, res) => {
             INSERT INTO posts (user_id, title, date_created, content)
             VALUES
                 (${user.userId}, '${title}', TO_TIMESTAMP(${date}), '${content}')
+                RETURNING post_id
         `;
         let qres = await client.query(query);
-        res.send('Post successfully created');
+        let row = qres.rows[0];
+        let postId = row.post_id;
+        res.redirect(req.baseUrl + '/' + postId);
     } catch(err) {
         res.send('Error: ' + err);
     }
