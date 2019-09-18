@@ -33,6 +33,25 @@ router.post('/create', async (req, res) => {
     }
 });
 
+router.put('/:postId', async (req, res) => {
+    try {
+        let client = await getClient();
+        let { title, content } = req.body;
+        let date = Date.now() / 1000;
+        let query = `
+            UPDATE posts
+            SET title = '${title}',
+                content = '${content}'
+            WHERE post_id = ${req.params.postId}
+            ;
+        `;
+        let qres = await client.query(query);
+        res.redirect(req.baseUrl + '/' + req.params.postId);
+    } catch(err) {
+        res.send('Error: ' + err);
+    }
+});
+
 router.delete('/:postId', async (req, res) => {
     let postId = req.params.postId;
     try {
