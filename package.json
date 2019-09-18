@@ -9,7 +9,8 @@
   "scripts": {
     "devstart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "makedb": "node db/makeDb.js"
+    "makedb": "node db/makeDb.js",
+    "reverse": "node db/reverse.js"
   },
   "repository": {
     "type": "git",

@@ -38,7 +38,9 @@ app.get('/userPreferences', (req, res) => {
     res.render('userPreferences', { layout: 'layouts/default' });
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+    console.log('Listening on port 3000');
+});
 
 /*
 let getUsers = () => {
