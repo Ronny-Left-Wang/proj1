@@ -12,8 +12,7 @@ router.get('/', async (req, res) => {
         let qres = await client.query('SELECT * FROM users');
         let users = [];
         qres.rows.forEach((row) => {
-            let name = row.first_name + ' ' + row.last_name;
-            let user = new User({name, dateCreated: row.date_created, userId: row.user_id, email: row.email});
+            let user = new User({data: row});
             users.push(user);
         });
         qres = await client.query('SELECT * FROM posts ORDER BY post_id DESC');
@@ -28,7 +27,8 @@ router.get('/', async (req, res) => {
             if (!user) {
                 console.error(`Post ${row.post_id} with user id ${row.user_id} cannot find user.`);
             } else {
-                let post = new Post({ user, postId: row.post_id, title: row.title, content: row.content, dateCreated: row.date_created });
+                let post = new Post({data:row, user});
+                console.log(post);
                 posts.push(post);
             }
         });
@@ -40,8 +40,7 @@ router.get('/', async (req, res) => {
 
 router.get('/register', (req, res) => {
     res.render('register', { layout: 'layouts/register' });
-});
-router.post('/register', async (req, res) => {
+}).post('/register', async (req, res) => {
     try {
         let client = await getClient();
         let { first_name, last_name, email, password } = req.body;
@@ -62,9 +61,7 @@ router.post('/register', async (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('login', { layout: 'layouts/register' });
-});
-
-router.post('/login', async (req, res) => {
+}).post('/login', async (req, res) => {
     try {
         let client = await getClient();
         let { email, password } = req.body;
@@ -76,6 +73,8 @@ router.post('/login', async (req, res) => {
         let row = qres.rows[0];
         let match = bcrypt.compareSync(password, row.hashed_password);
         if (match) {
+            let user = new User({data: row});
+            req.session.user = user;
             res.send('Login successful.');
         } else {
             res.redirect(req.baseUrl + '/login');

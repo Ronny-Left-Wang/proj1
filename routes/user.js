@@ -10,12 +10,12 @@ router.get('/:userId', async (req, res) => {
         let qres = await client.query(`SELECT * from users WHERE user_id = ${req.params.userId}`);
         let row = qres.rows[0];
         let name = row.first_name + ' ' + row.last_name;
-        let user = new User({name, dateCreated: row.date_created, userId: row.user_id, email: row.email});
+        let user = new User({data: row});
         if (user) {
             let posts = [];
             qres = await client.query(`SELECT * FROM posts WHERE user_id = ${row.user_id}`);
             qres.rows.forEach((row) => {
-                let post = new Post({ user, postId: row.post_id, title: row.title, content: row.content, dateCreated: row.date_created });
+                let post = new Post({data: row});
                 posts.push(post);
             });
             res.render('user', { user, posts, layout: 'layouts/default' });
